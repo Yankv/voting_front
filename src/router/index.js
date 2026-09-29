@@ -40,6 +40,10 @@ export default defineRouter(({ store }) => {
       }
     }
 
+    if (to.name === 'admin-login' && authStore.adminToken) {
+      return { name: 'admin' }
+    }
+
     const votingStore = useVotingStore(store)
     if (to.meta.requiresVoterSession && !votingStore.voterToken) {
       return { name: 'vote' }
