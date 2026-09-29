@@ -2,6 +2,9 @@ import MainLayout from '@/layouts/MainLayout.vue'
 import NotFoundPage from '@/pages/NotFoundPage.vue'
 import HomePage from '@/pages/index.vue'
 import PortalPage from '@/pages/PortalPage.vue'
+import LoginVotingPage from '@/pages/LoginVotingPage.vue'
+import VotingPage from '@/pages/VotingPage.vue'
+import VoteConfirmationPage from '@/pages/VoteConfirmationPage.vue'
 
 const routes = [
   {
@@ -16,11 +19,22 @@ const routes = [
       {
         path: 'votar',
         name: 'vote',
-        component: PortalPage,
-        props: {
-          title: 'Participa en la votación',
-          description: 'Valida tu identidad para emitir tu voto de forma segura.',
-          icon: 'how_to_vote',
+        component: LoginVotingPage,
+      },
+      {
+        path: 'votar/seleccionar',
+        name: 'voting-ballot',
+        component: VotingPage,
+        meta: {
+          requiresVoterSession: true,
+        },
+      },
+      {
+        path: 'votar/confirmacion',
+        name: 'vote-confirmation',
+        component: VoteConfirmationPage,
+        meta: {
+          requiresVoteConfirmation: true,
         },
       },
       {

@@ -6,6 +6,7 @@ import {
   createWebHistory,
 } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.store'
+import { useVotingStore } from '@/stores/voting.store'
 import routes from './routes'
 
 /*
@@ -31,16 +32,29 @@ export default defineRouter(({ store }) => {
   })
 
   Router.beforeEach((to) => {
-    if (!to.matched.some((record) => record.meta.requiresAdmin)) {
-      return true
-    }
-
     const authStore = useAuthStore(store)
-    if (!authStore.adminToken) {
+    if (to.matched.some((record) => record.meta.requiresAdmin) && !authStore.adminToken) {
       return {
         name: 'admin-login',
         query: { redirect: to.fullPath },
       }
+    }
+
+    const votingStore = useVotingStore(store)
+    if (to.meta.requiresVoterSession && !votingStore.voterToken) {
+      return { name: 'vote' }
+    }
+
+    if (to.meta.requiresVoteConfirmation && !votingStore.voteRegistered) {
+      return { name: 'vote' }
+    }
+
+    if (to.name === 'vote' && votingStore.voterToken) {
+      return { name: 'voting-ballot' }
+    }
+
+    if (to.name === 'vote' && votingStore.voteRegistered) {
+      return { name: 'vote-confirmation' }
     }
 
     return true

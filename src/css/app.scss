@@ -186,6 +186,99 @@ body {
   border-radius: 18px;
 }
 
+.voter-page {
+  margin: 0 auto;
+  max-width: 920px;
+  padding: 64px 24px 80px;
+}
+
+.voter-intro,
+.ballot-heading {
+  margin: 0 auto 28px;
+  max-width: 720px;
+}
+
+.voter-card {
+  background: var(--surface-background);
+  border-color: var(--border-color);
+  border-radius: 18px;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.privacy-note {
+  align-items: center;
+  color: var(--muted-text);
+  display: flex;
+  font-size: 0.85rem;
+  gap: 10px;
+}
+
+.candidate-list {
+  display: grid;
+  gap: 14px;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.candidate-card {
+  background: var(--surface-background);
+  border-color: var(--border-color);
+  border-radius: 16px;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.candidate-card:hover {
+  border-color: var(--q-primary);
+  transform: translateY(-1px);
+}
+
+.candidate-card--selected {
+  border-color: var(--q-primary);
+  box-shadow: 0 0 0 2px rgb(21 94 239 / 15%);
+}
+
+.candidate-avatar {
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.ballot-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: space-between;
+  margin: 28px auto 0;
+  max-width: 720px;
+}
+
+.confirmation-card {
+  background: var(--surface-background);
+  border-radius: 18px;
+  max-width: 520px;
+  width: 100%;
+}
+
+.confirmation-result {
+  background: var(--surface-background);
+  border-color: var(--border-color);
+  border-radius: 20px;
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+.body--dark .voter-card,
+.body--dark .candidate-card,
+.body--dark .confirmation-result,
+.body--dark .confirmation-card {
+  background: var(--surface-background);
+}
+
 @media (max-width: 800px) {
   .landing-page {
     padding: 44px 24px 64px;
@@ -217,6 +310,19 @@ body {
   }
 
   .hero-actions .q-btn {
+    width: 100%;
+  }
+
+  .voter-page {
+    padding: 38px 18px 56px;
+  }
+
+  .ballot-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ballot-actions .q-btn {
     width: 100%;
   }
 }
